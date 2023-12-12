@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:45:06 by adshafee          #+#    #+#             */
-/*   Updated: 2023/12/12 09:07:09 by adshafee         ###   ########.fr       */
+/*   Updated: 2023/12/12 09:08:09 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,4 @@ int	ft_printf(const char *type, ...)
 	}
 	va_end(arg);
 	return (i);
-}
-
-int	main()
-{
-	ft_printf("%s", ft_printf("Hello brends"));
 }
