@@ -6,7 +6,7 @@
 /*   By: adhil <adhil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:45:06 by adshafee          #+#    #+#             */
-/*   Updated: 2023/12/12 22:35:00 by adhil            ###   ########.fr       */
+/*   Updated: 2023/12/12 22:36:33 by adhil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,9 @@ int	ft_printf(const char *type, ...)
 	}
 	va_end(arg);
 	return (i);
+}
+
+int	main(void)
+{
+	ft_printf("%d\n", 34);
 }
