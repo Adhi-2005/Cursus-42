@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:45:06 by adshafee          #+#    #+#             */
-/*   Updated: 2023/12/12 08:50:39 by adshafee         ###   ########.fr       */
+/*   Updated: 2023/12/12 08:53:41 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,4 @@ int	ft_printf(const char *type, ...)
 	}
 	va_end(arg);
 	return (i);
-}
-
-int main()
-{
-	printf("%d\n", ft_printf("Aadil"));
 }
