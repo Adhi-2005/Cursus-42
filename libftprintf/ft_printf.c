@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adhil <adhil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:45:06 by adshafee          #+#    #+#             */
-/*   Updated: 2023/12/12 09:08:09 by adshafee         ###   ########.fr       */
+/*   Updated: 2023/12/12 22:25:29 by adhil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,9 @@ int	ft_printf(const char *type, ...)
 	}
 	va_end(arg);
 	return (i);
+}
+
+int	main(void)
+{
+	ft_printf("%d\n", 34);
 }
