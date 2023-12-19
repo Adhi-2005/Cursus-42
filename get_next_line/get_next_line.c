@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adhil <adhil@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:05:52 by adhil             #+#    #+#             */
-/*   Updated: 2023/12/19 12:27:34 by adhil            ###   ########.fr       */
+/*   Updated: 2023/12/19 15:59:02 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,9 @@
 char	*read_to_remaining(int fd, char *remaining)
 {
 	int		read_bytes;
-	char	*buffer;	
-	char	*temp;
+	char	*buffer;
+	char	*temp;	
 
-	// if (!remaining)
-	// {
-	// 	remaining = malloc(sizeof(char));
-	// 	remaining[0] = 0;
-	// }
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
@@ -33,10 +28,9 @@ char	*read_to_remaining(int fd, char *remaining)
 		if (read_bytes <= 0)
 		{
 			free(buffer);
-			if(read_bytes == 0)
+			if (read_bytes == 0)
 				return (remaining);
-			free(temp);
-			return (NULL);
+			return (0);
 		}
 		buffer[read_bytes] = '\0';
 		temp = remaining;
@@ -55,7 +49,9 @@ char	*assign_to_return_line(char *remaining)
 	i = 0;
 	while (remaining[i] && remaining[i] != '\n')
 		i++;
-	line = (char *)malloc(sizeof(char) * i + 2);
+	if (remaining[i] == '\n')
+		i++;
+	line = (char *)malloc(sizeof(char) * (i + 1));
 	if (!line)
 		return(NULL);
 	i = 0;
@@ -78,19 +74,22 @@ char	*clear_stuffs_from_remaining(char *remaining)
 	int		i;
 	int		j;
 	char	*new_remaining;
-
 	i = 0;
 	while (remaining[i] && remaining[i] != '\n')
 		i++;
-	if (!remaining)
+	if (remaining[i] == '\n')
+		i++;
+	if (!remaining[i] || !remaining)
 	{
 		free(remaining);
 		return (NULL);
 	}
-	new_remaining = (char *)malloc(sizeof(char) * ft_strlen(remaining) - i + 1);
+	new_remaining = malloc(ft_strlen(remaining) - i + 1);
 	if (!new_remaining)
+	{
+		free(remaining);
 		return (NULL);
-	i++;
+	}
 	j = 0;
 	while (remaining[i])
 		new_remaining[j++] = remaining[i++];
@@ -114,23 +113,7 @@ char	*get_next_line(int fd)
 	return (return_line);
 }
 
-#include <stdio.h>
-
-int main(void)
-{
-    int fd = open("testfile.txt", O_RDONLY);
-    char *line;
-
-    line = get_next_line(fd);
-    printf("Line: %s\n", line);
-	while ((line = get_next_line(fd)))
-	{
-		printf("line: %s", line);
-		free(line);
-	}
-	close(fd);
-}
-
+// 
 
 // // There is some errors in this program and I have to analyze it before it going to be pushed
 // // Mainly it is not reading the stuffs in the second call....
