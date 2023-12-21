@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:05:52 by adhil             #+#    #+#             */
-/*   Updated: 2023/12/19 15:59:02 by adshafee         ###   ########.fr       */
+/*   Updated: 2023/12/21 16:23:23 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*read_to_remaining(int fd, char *remaining)
 			free(buffer);
 			if (read_bytes == 0)
 				return (remaining);
+			free(remaining);
 			return (0);
 		}
 		buffer[read_bytes] = '\0';
@@ -37,8 +38,7 @@ char	*read_to_remaining(int fd, char *remaining)
 		remaining = ft_strjoin(remaining, buffer);
 		free(temp);
 	}
-	free(buffer);
-	return (remaining);
+	return (free(buffer), remaining);
 }
 
 char	*assign_to_return_line(char *remaining)
@@ -53,7 +53,7 @@ char	*assign_to_return_line(char *remaining)
 		i++;
 	line = (char *)malloc(sizeof(char) * (i + 1));
 	if (!line)
-		return(NULL);
+		return (NULL);
 	i = 0;
 	while (remaining[i] != '\n' && remaining[i])
 	{
@@ -74,6 +74,7 @@ char	*clear_stuffs_from_remaining(char *remaining)
 	int		i;
 	int		j;
 	char	*new_remaining;
+
 	i = 0;
 	while (remaining[i] && remaining[i] != '\n')
 		i++;
@@ -94,15 +95,14 @@ char	*clear_stuffs_from_remaining(char *remaining)
 	while (remaining[i])
 		new_remaining[j++] = remaining[i++];
 	new_remaining[j] = '\0';
-	free(remaining);
-	return (new_remaining);
+	return (free(remaining), new_remaining);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*remaining;
 	char		*return_line;
- 
+
 	if (fd < 0 || BUFFER_SIZE < 1 || BUFFER_SIZE > INT_MAX)
 		return (0);
 	remaining = read_to_remaining(fd, remaining);
@@ -112,12 +112,3 @@ char	*get_next_line(int fd)
 	remaining = clear_stuffs_from_remaining(remaining);
 	return (return_line);
 }
-
-// 
-
-// // There is some errors in this program and I have to analyze it before it going to be pushed
-// // Mainly it is not reading the stuffs in the second call....
-
-// //check for the protection conditions also....
-// // Protections should be raised correctly.
-// // check whether we need extra function to free the memory.

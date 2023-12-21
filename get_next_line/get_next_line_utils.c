@@ -6,13 +6,13 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 16:48:24 by adhil             #+#    #+#             */
-/*   Updated: 2023/12/19 15:52:56 by adshafee         ###   ########.fr       */
+/*   Updated: 2023/12/21 16:24:39 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char  *s1, char  *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -43,7 +43,7 @@ size_t	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
-	if(!s)
+	if (!s)
 		return (0);
 	while (s[i])
 	{
