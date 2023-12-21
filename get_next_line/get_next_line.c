@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adhil <adhil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:05:52 by adhil             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/12/21 17:37:26 by adshafee         ###   ########.fr       */
+=======
+/*   Updated: 2023/12/19 16:01:58 by adhil            ###   ########.fr       */
+>>>>>>> 5aff4af (deleted the txt file from the repository)
 /*                                                                            */
 /* ************************************************************************** */
 
