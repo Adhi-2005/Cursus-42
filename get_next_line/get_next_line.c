@@ -3,18 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adhil <adhil@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 15:05:52 by adhil             #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2023/12/21 17:37:26 by adshafee         ###   ########.fr       */
-=======
-/*   Updated: 2023/12/19 16:01:58 by adhil            ###   ########.fr       */
->>>>>>> 5aff4af (deleted the txt file from the repository)
-=======
-/*   Updated: 2023/12/23 13:24:39 by adhil            ###   ########.fr       */
->>>>>>> 0f8f882 (all are cleared now)
+/*   Created: 2023/12/23 13:31:10 by adshafee          #+#    #+#             */
+/*   Updated: 2023/12/23 13:31:13 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
