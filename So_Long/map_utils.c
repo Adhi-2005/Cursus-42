@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:11:35 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/14 14:57:39 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:38:46 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ int	check_file_extention(char *str)
 
 void	dimention_check(char *str)
 {
-	int length = 0;
-	int breadth = 0;
+	int breadth = 0;//rows
 	char	*line;
 	int		fd;
 	int		line_size;
@@ -49,9 +48,7 @@ void	dimention_check(char *str)
 
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
-	{
 		perror("ERROR : Unable to open the file...!");
-	}
 	while ((line = get_next_line(fd)))
 	{
 		line_size = ft_strlen(line);
@@ -64,8 +61,6 @@ void	dimention_check(char *str)
 			close(fd);
 			exit(1);
 		}
-		if(line_size > length)
-			length = line_size;
 		breadth++;
 		free(line);
 	}
