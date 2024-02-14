@@ -5,17 +5,17 @@
 #                                                     +:+ +:+         +:+      #
 #    By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/06 17:18:44 by adshafee          #+#    #+#              #
-#    Updated: 2024/02/13 19:37:22 by adshafee         ###   ########.fr        #
+#    Created: 2024/02/13 19:31:51 by adshafee          #+#    #+#              #
+#    Updated: 2024/02/13 19:56:42 by adshafee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-NAME = libftprintf
+NAME = get_next_line
 AR = ar -rc
 RM = rm -rf
-SRC = ft_hexa_pointers.c ft_printf.c ft_functions.c \
+SRC = get_next_line.c get_next_line_utils.c \
 
 OBJ = $(SRC:.c=.o)
 

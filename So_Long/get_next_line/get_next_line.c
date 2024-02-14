@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:05:52 by adhil             #+#    #+#             */
-/*   Updated: 2023/12/21 16:23:23 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:09:52 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,22 @@ char	*clear_stuffs_from_remaining(char *remaining)
 	return (free(remaining), new_remaining);
 }
 
+char	*Finalize_the_output_for_so_long(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	str[i] = '\0';
+	return (str);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*remaining;
 	char		*return_line;
+	char		*Finalize;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || BUFFER_SIZE > INT_MAX)
 		return (0);
@@ -109,6 +121,7 @@ char	*get_next_line(int fd)
 	if (!remaining)
 		return (NULL);
 	return_line = assign_to_return_line(remaining);
+	Finalize = Finalize_the_output_for_so_long(return_line);
 	remaining = clear_stuffs_from_remaining(remaining);
-	return (return_line);
+	return (Finalize);
 }
