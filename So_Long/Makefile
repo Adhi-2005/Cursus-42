@@ -6,7 +6,7 @@
 #    By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/06 17:18:44 by adshafee          #+#    #+#              #
-#    Updated: 2024/02/13 19:55:56 by adshafee         ###   ########.fr        #
+#    Updated: 2024/02/17 12:49:49 by adshafee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = so_long
 FT_PRINTF = ./libftprintf/libftprintf
 GNL = ./get_next_line/get_next_line
 RM = rm -rf
-SRC = so_long.c map_utils.c
+SRC = so_long.c map_utils.c map_utils2.c
 
 OBJ = $(SRC:.c=.o)
 

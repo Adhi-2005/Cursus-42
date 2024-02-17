@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:29:53 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/12 18:05:53 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:18:20 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	main(int ac, char **av)
 	{
 		if (!check_file_extention(av[1]))
 			return (0);
-		dimention_check(av[1]);
+		if (dimention_check(av[1]) == 1)
+			create_array_for_map(av[1]);
 	}
 	else
 	{
