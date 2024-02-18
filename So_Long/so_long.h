@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:43:04 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/17 13:11:28 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/02/18 02:09:26 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,29 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <stdbool.h>
 
 typedef struct s_list
 {
-	int length;
-	int breadth;
-} t_array;
+	int	length;
+	int	breadth;
+}	t_array;
+
+// typedef struct u_list
+// {
+// 	int		i;
+// 	int		j;
+// 	int		k;
+// 	int		valid;
+// 	char	current_char;
+// } t_check_for_game_objects;
 
 // map_utils.c
 
 int		check_file_extention(char *str);
 int		dimention_check(char *str);
-char	*create_array_for_map(char *str);
+char	**create_array_for_map(char *str);
+bool	check_for_game_objects(char	**str);
 
 // map_utils2.c
 

@@ -1,0 +1,130 @@
+check_for_game_objects(map_array)
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool	check_for_game_objects(char	**str)
+{
+	char						game_objects[] = {'P', 'C', 'E', '1', '0'};
+	t_check_for_game_objects	objects;
+
+	while (str[objects.i])
+	{
+		objects.j = 0;
+		while (str[objects.i][objects.j])
+		{
+			objects.k = 0;
+			objects.valid = 0;
+			while (objects.k < 5)
+			{
+				if (str[objects.i][objects.j] == game_objects[objects.k])
+				{
+					objects.valid = 1;
+					break;
+				}
+				objects.k++;
+			}
+			validity_check(objects.valid);
+			objects.j++;
+		}
+		objects.i++;
+	}
+	return(1);
+}
+
+PCE
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+bool	check_for_game_objects(char	**str)
+{
+	char	game_objects[] = {'P', 'C', 'E', '1', '0'};
+	int		i;
+	int		j;
+	int		k;
+	int		valid;
+
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			k = 0;
+			valid = 0;
+			while (k < 5)
+			{
+				if (str[i][j] == game_objects[k])
+				{
+					valid = 1;
+					break;
+				}
+				k++;
+			}
+			if (!valid)
+			{
+				// perror("(ERROR) Your Map is not valid.. Input all the game objects in the map..");
+				fprintf(stderr, "(ERROR) Your Map is not valid.. Input all the game objects in the map..\n");
+                return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// This is the check for game objects and I need to make it to an another function or I need to make it into a struct.. 
+
+
+bool	check_for_game_objects(char	**str)
+{
+	char	game_objects[] = {'P', 'C', 'E', '1', '0'};
+	int		i;
+	int		j;
+	int		k;
+	int		valid;
+
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			valid = 0;
+			k = 0;
+			while (k < 5)
+			{
+				if (str[i][j] == game_objects[k])
+				{
+					valid = 1;
+					break;
+				}
+				k++;
+			}
+			if (!valid)
+			{
+				ft_printf("(ERROR) Your Map is not valid. Input all the game objects in the map.\n");
+				return 0;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

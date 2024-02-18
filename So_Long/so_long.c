@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:29:53 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/17 12:18:20 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/02/18 02:09:40 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 int	main(int ac, char **av)
 {
+	char	**map_array;
+
 	if (ac == 2)
 	{
 		if (!check_file_extention(av[1]))
 			return (0);
 		if (dimention_check(av[1]) == 1)
-			create_array_for_map(av[1]);
+		{
+			map_array = create_array_for_map(av[1]);
+			check_for_game_objects(map_array);
+		}
 	}
 	else
 	{
