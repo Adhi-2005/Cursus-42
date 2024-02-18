@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:43:04 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/18 02:09:26 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/02/18 17:18:11 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_list
 {
 	int	length;
 	int	breadth;
+	int	fd;
 }	t_array;
 
 // typedef struct u_list

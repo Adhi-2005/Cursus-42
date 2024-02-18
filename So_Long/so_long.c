@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:29:53 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/18 02:09:40 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/02/18 17:46:00 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	main(int ac, char **av)
 		if (dimention_check(av[1]) == 1)
 		{
 			map_array = create_array_for_map(av[1]);
+			// while (*map_array)
+			// {
+			// 	ft_printf("%s\n", *map_array);
+			// 	map_array++;
+			// }
 			check_for_game_objects(map_array);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:49:59 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/17 13:11:18 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/02/18 17:41:09 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,33 @@ char	**ft_split(const char *s)
 	}
 	spl_str[i] = NULL;
 	return (spl_str);
+}
+
+int	dimention_check(char *str)
+{
+	char		*line;
+	t_array		area;
+	static int	expected_length;
+
+	area.fd = open(str, O_RDONLY);
+	if (area.fd == -1)
+		perror("(ERROR) Unable to open the file...!");
+	while (1)
+	{
+		line = get_next_line(area.fd);
+		if (!line)
+			break ;
+		area.length = ft_strlen(line);
+		if (area.breadth == 0)
+			expected_length = area.length;
+		else if (expected_length != (area.length))
+		{
+			ft_printf("(ERROR) Map not valid");
+			return (free (line), close (area.fd), exit (1), 0);
+		}
+		area.breadth++;
+		free(line);
+	}
+	// printf("Length = %d\nBreadth = %d\n", area.length, area.breadth);
+	return (1);
 }
