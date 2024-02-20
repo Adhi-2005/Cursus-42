@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:11:35 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/18 17:45:06 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/02/21 02:24:18 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*assign_game_objects(void)
 	return (game_objects);
 }
 
-bool	check_for_game_objects(char	**str)
+bool	check_for_game_objects(t_array str)
 {
 	char	*game_objects;
 	int		i;
@@ -76,12 +76,12 @@ bool	check_for_game_objects(char	**str)
 
 	game_objects = assign_game_objects();
 	i = 0;
-	while (str[i])
+	while (str.map[i])
 	{
 		j = 0;
-		while (str[i][j])
+		while (str.map[i][j])
 		{
-			valid = is_valid_game_object(str[i][j], game_objects);
+			valid = is_valid_game_object(str.map[i][j], game_objects);
 			if (!valid)
 			{
 				ft_printf("(ERROR) Map not valid. ");
@@ -95,20 +95,21 @@ bool	check_for_game_objects(char	**str)
 	return (1);
 }
 
-char	**create_array_for_map(char *str)
+t_array	*create_array_for_map(char *str, t_measurements area)
 {
-	char	**array;
 	char	*buffer;
-	t_array	area;
+	int	fd;
 
+	t_array *map_array = malloc(sizeof(t_array)* 1024);
 	buffer = malloc(sizeof(char) * (area.length * area.breadth) + area.breadth);
-	area.fd = open(str, O_RDONLY);
-	read(area.fd, buffer, (area.length * area.breadth));
-	array = ft_split(buffer);
-	// while (*array)
-	// {
-	// 	printf("%s\n", *array);
-	// 	array++;
-	// }
-	return (array);
+	fd = open(str, O_RDONLY);
+	read(fd, buffer, (area.length * area.breadth));
+	map_array->map = ft_split(buffer);
+	char **tmp = map_array->map;
+	while (*tmp)
+	{
+		printf("%s\n", *tmp);
+		tmp++;
+	}
+	return (map_array);
 }

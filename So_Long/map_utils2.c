@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:49:59 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/18 17:41:09 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/02/21 02:10:30 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,31 +106,34 @@ char	**ft_split(const char *s)
 	return (spl_str);
 }
 
-int	dimention_check(char *str)
+t_measurements	dimention_check(char *str)
 {
-	char		*line;
-	t_array		area;
-	static int	expected_length;
+	t_measurements		area;
+	char				*line;
+	int					fd;
+	size_t				expected_length;
 
-	area.fd = open(str, O_RDONLY);
-	if (area.fd == -1)
+	area.length = 0;
+	area.breadth = 0;
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
 		perror("(ERROR) Unable to open the file...!");
-	while (1)
+	while ((line = get_next_line(fd)))
 	{
-		line = get_next_line(area.fd);
-		if (!line)
-			break ;
 		area.length = ft_strlen(line);
 		if (area.breadth == 0)
 			expected_length = area.length;
-		else if (expected_length != (area.length))
+		else if (expected_length != area.length)
 		{
 			ft_printf("(ERROR) Map not valid");
-			return (free (line), close (area.fd), exit (1), 0);
+			free(line);
+			close(fd);
+			exit(1);
 		}
 		area.breadth++;
 		free(line);
 	}
-	// printf("Length = %d\nBreadth = %d\n", area.length, area.breadth);
-	return (1);
+	ft_printf("Length = %d\nBreadth = %d\n", area.length, area.breadth);
+	close(fd);
+	return (area);
 }

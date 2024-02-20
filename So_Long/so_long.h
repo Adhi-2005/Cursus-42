@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:43:04 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/18 17:18:11 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/02/21 02:23:24 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@
 # include <stdio.h>
 # include <stdbool.h>
 
-typedef struct s_list
+typedef struct a_list
 {
-	int	length;
-	int	breadth;
-	int	fd;
+	size_t	length;
+	size_t	breadth;
+}	t_measurements;
+
+typedef struct b_list
+{
+	char	**map;
 }	t_array;
 
 // typedef struct u_list
@@ -40,10 +44,10 @@ typedef struct s_list
 
 // map_utils.c
 
-int		check_file_extention(char *str);
-int		dimention_check(char *str);
-char	**create_array_for_map(char *str);
-bool	check_for_game_objects(char	**str);
+int					check_file_extention(char *str);
+t_measurements		dimention_check(char *str);
+t_array				*create_array_for_map(char *str, t_measurements area);
+bool				check_for_game_objects(t_array str);
 
 // map_utils2.c
 
@@ -51,5 +55,9 @@ size_t	word_count(const char *s, char c);
 char	**ft_split(const char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
+
+// map_utils3.c
+
+
 
 #endif
