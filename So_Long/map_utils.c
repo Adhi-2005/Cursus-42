@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:11:35 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/21 02:24:18 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:56:02 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ t_array	*create_array_for_map(char *str, t_measurements area)
 	read(fd, buffer, (area.length * area.breadth));
 	map_array->map = ft_split(buffer);
 	char **tmp = map_array->map;
-	while (*tmp)
-	{
-		printf("%s\n", *tmp);
-		tmp++;
-	}
+	// while (*tmp)
+	// {
+	// 	printf("%s\n", *tmp);
+	// 	tmp++;
+	// }
 	return (map_array);
 }
