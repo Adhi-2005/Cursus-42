@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:11:35 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/21 17:56:02 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:24:30 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,16 @@ t_array	*create_array_for_map(char *str, t_measurements area)
 
 	t_array *map_array = malloc(sizeof(t_array)* 1024);
 	buffer = malloc(sizeof(char) * (area.length * area.breadth) + area.breadth);
+	area.buff = buffer;
+	while (area.buff)
+	{
+		ft_printf("%s\n", area.buff);
+		area.buff++;
+	}
 	fd = open(str, O_RDONLY);
 	read(fd, buffer, (area.length * area.breadth));
 	map_array->map = ft_split(buffer);
-	char **tmp = map_array->map;
+	// char **tmp = map_array->map;
 	// while (*tmp)
 	// {
 	// 	printf("%s\n", *tmp);

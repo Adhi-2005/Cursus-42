@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:49:59 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/21 02:10:30 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/03/03 18:24:44 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ char	**ft_split(const char *s)
 	return (spl_str);
 }
 
-t_measurements	dimention_check(char *str)
+t_array	dimention_check(char *str)
 {
-	t_measurements		area;
+	t_array		area;
 	char				*line;
 	int					fd;
 	size_t				expected_length;

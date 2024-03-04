@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
@@ -22,15 +22,17 @@
 # include <stdio.h>
 # include <stdbool.h>
 
-typedef struct a_list
-{
-	size_t	length;
-	size_t	breadth;
-}	t_measurements;
+// typedef struct a_list
+// {
+	
+// }	t_measurements;
 
 typedef struct b_list
 {
+	size_t	length;
+	size_t	breadth;
 	char	**map;
+	
 }	t_array;
 
 // typedef struct u_list
@@ -45,9 +47,10 @@ typedef struct b_list
 // map_utils.c
 
 int					check_file_extention(char *str);
-t_measurements		dimention_check(char *str);
-t_array				*create_array_for_map(char *str, t_measurements area);
-bool				check_for_game_objects(t_array str);
+t_array				dimention_check(char *str);
+t_array				*create_array_for_map(char *str, t_array area);
+// bool				check_for_game_objects(t_array *str);
+int					check_for_game_objects(t_array *map_array, t_array dimensions);
 
 // map_utils2.c
 
@@ -58,6 +61,6 @@ char	*ft_substr(const char *s, unsigned int start, size_t len);
 
 // map_utils3.c
 
-
+int	game_objects_conditions_check(t_array *map, t_array size);
 
 #endif
