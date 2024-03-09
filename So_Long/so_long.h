@@ -50,7 +50,7 @@ int					check_file_extention(char *str);
 t_array				dimention_check(char *str);
 t_array				*create_array_for_map(char *str, t_array area);
 // bool				check_for_game_objects(t_array *str);
-int					check_for_game_objects(t_array *map_array, t_array dimensions);
+int					check_for_game_objects(t_array *map_array, t_array size);
 
 // map_utils2.c
 

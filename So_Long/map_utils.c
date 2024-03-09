@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:11:35 by adshafee          #+#    #+#             */
-/*   Updated: 2024/02/21 18:24:30 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:12:50 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,84 +38,52 @@ int	check_file_extention(char *str)
 	return (1);
 }
 
-int	is_valid_game_object(char obj, char game_objects[])
+int is_valid_character(char c)
 {
-	int	k;
-
-	k = 0;
-	while (k < 5)
+	if (c != '1' && c != '0' && c != 'P' && c != 'E' && c != 'C')
 	{
-		if (obj == game_objects[k])
-			return (1);
-		k++;
+		ft_printf("Error: Invalid character in map\n");
+		return 0;
 	}
-	return (0);
+	return 1;
 }
 
-char	*assign_game_objects(void)
+int check_for_game_objects(t_array *map_array, t_array size)
 {
-	char	*game_objects;
-
-	game_objects = malloc(5 * sizeof(char));
-	if (game_objects == NULL)
-		return (NULL);
-	game_objects[0] = 'P';
-	game_objects[1] = 'C';
-	game_objects[2] = 'E';
-	game_objects[3] = '1';
-	game_objects[4] = '0';
-	return (game_objects);
-}
-
-bool	check_for_game_objects(t_array str)
-{
-	char	*game_objects;
-	int		i;
-	int		j;
-	int		valid;
-
-	game_objects = assign_game_objects();
-	i = 0;
-	while (str.map[i])
+	size_t i = 0;
+	size_t j = 0;
+	while (i < size.breadth)
 	{
 		j = 0;
-		while (str.map[i][j])
+		while (j < size.length)
 		{
-			valid = is_valid_game_object(str.map[i][j], game_objects);
-			if (!valid)
-			{
-				ft_printf("(ERROR) Map not valid. ");
-				ft_printf("Input the required objects in the map.\n");
-				return (0);
-			}
+			if (!is_valid_character(map_array->map[i][j]))
+				return 0;
 			j++;
 		}
 		i++;
 	}
-	return (1);
+	return 1;
 }
 
-t_array	*create_array_for_map(char *str, t_measurements area)
+t_array	*create_array_for_map(char *str, t_array area)
 {
 	char	*buffer;
 	int	fd;
+	size_t	read_bytes;
 
 	t_array *map_array = malloc(sizeof(t_array)* 1024);
 	buffer = malloc(sizeof(char) * (area.length * area.breadth) + area.breadth);
-	area.buff = buffer;
-	while (area.buff)
-	{
-		ft_printf("%s\n", area.buff);
-		area.buff++;
-	}
 	fd = open(str, O_RDONLY);
-	read(fd, buffer, (area.length * area.breadth));
+	read_bytes = read(fd, buffer, (area.length * area.breadth) + area.breadth);
+	buffer[read_bytes] = '\0';
 	map_array->map = ft_split(buffer);
-	// char **tmp = map_array->map;
-	// while (*tmp)
-	// {
-	// 	printf("%s\n", *tmp);
-	// 	tmp++;
-	// }
+	char **tmp = map_array->map;
+	printf("%s\n", "The below map is printed from the function 'creat_array_for_map'.....");
+	while (*tmp)
+	{
+		printf("%s\n", *tmp);
+		tmp++;
+	}
 	return (map_array);
 }
