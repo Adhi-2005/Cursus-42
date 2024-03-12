@@ -22,27 +22,18 @@
 # include <stdio.h>
 # include <stdbool.h>
 
-// typedef struct a_list
-// {
-	
-// }	t_measurements;
-
 typedef struct b_list
 {
 	size_t	length;
 	size_t	breadth;
 	char	**map;
+	bool	exit_found;
+	bool	collectibles_found;
+	int		player_y;
+	int		player_x;
+	int		num_of_collectibles;
 	
 }	t_array;
-
-// typedef struct u_list
-// {
-// 	int		i;
-// 	int		j;
-// 	int		k;
-// 	int		valid;
-// 	char	current_char;
-// } t_check_for_game_objects;
 
 // map_utils.c
 
@@ -61,6 +52,12 @@ char	*ft_substr(const char *s, unsigned int start, size_t len);
 
 // map_utils3.c
 
-int	game_objects_conditions_check(t_array *map, t_array size);
+int	check_map_wall(t_array *map, t_array size);
+int	check_other_object_conditions(t_array *map_array, t_array size);
+
+// dfs.c
+bool	dfs(t_array *game, size_t x, size_t y, bool visited[][game->length]);
+void	*ft_memset(void *b, int c, size_t len);
+bool	is_valid_path(t_array *game);
 
 #endif

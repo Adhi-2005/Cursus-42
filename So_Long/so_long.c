@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:29:53 by adshafee          #+#    #+#             */
-/*   Updated: 2024/03/09 19:21:32 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/03/11 23:30:41 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ int	main(int ac, char **av)
 			// 	map_array++;
 			// }	
 			hey = check_for_game_objects(map, area);
-			if (game_objects_conditions_check(map, area) == 0)
+			if (check_map_wall(map, area) == 0)
 			{
 				ft_printf("%s\n", "Border of the map is not valid.. please check and correct it..");
 				return (0);
 			}
+			hey = check_other_object_conditions(map, area);
+			is_valid_path(map);
 		}
 	}
 	else

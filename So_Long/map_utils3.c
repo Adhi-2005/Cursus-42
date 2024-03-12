@@ -6,13 +6,13 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 01:52:26 by adshafee          #+#    #+#             */
-/*   Updated: 2024/03/09 19:23:43 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/03/11 22:56:31 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	game_objects_conditions_check(t_array *map, t_array size)
+int	check_map_wall(t_array *map, t_array size)
 {
 	size_t	i = 0;
 
@@ -28,6 +28,41 @@ int	game_objects_conditions_check(t_array *map, t_array size)
 		if (map->map[i][0] != '1' || map->map[i][size.length - 1] != '1')
 			return (0);
 		i++;
+	}
+	return (1);
+}
+
+int	check_other_object_conditions(t_array *map_array, t_array size)
+{
+	int	player;
+	int	collectibles;
+	int	exit;
+	size_t	i;
+	size_t	j;
+
+	player = 0;
+	collectibles = 0;
+	exit = 0;
+	i = 0;
+	while (i < size.breadth)
+	{
+		j = 0;
+		while (j < size.length)
+		{
+			if (map_array->map[i][j] == 'P')
+				player++;
+			else if (map_array->map[i][j] == 'C')
+				collectibles++;
+			else if (map_array->map[i][j] == 'E')
+				exit++;
+			j++;
+		}
+		i++;
+	}
+	if (player != 1 || collectibles < 1 || exit != 1)
+	{
+		ft_printf("Input the objects correctly...");
+		return (0);
 	}
 	return (1);
 }
