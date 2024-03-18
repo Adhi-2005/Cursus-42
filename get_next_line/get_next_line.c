@@ -112,3 +112,20 @@ char	*get_next_line(int fd)
 	remaining = clear_stuffs_from_remaining(remaining);
 	return (return_line);
 }
+
+#include "get_next_line.h"
+
+int main()
+{
+	int fd;
+	fd = open("sample.txt", O_RDONLY);
+	char *line = get_next_line(56);
+	printf("Test case 1: %s\n", line);
+	free(line);
+	line = get_next_line(fd);
+	printf("second line first file %s", line);
+	free(line);
+	line = get_next_line(fd);
+	printf("third line first file: %s",line);
+	free(line);
+}
