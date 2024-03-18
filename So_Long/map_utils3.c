@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 01:52:26 by adshafee          #+#    #+#             */
-/*   Updated: 2024/03/11 22:56:31 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:03:12 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,50 @@ int	check_other_object_conditions(t_array *map_array, t_array size)
 	}
 	return (1);
 }
+
+void	get_player_position(t_array *game)
+{
+	size_t	i;
+	size_t	j;
+
+	j = 0;
+	i = 0;
+	while (i < game->breadth)
+	{
+		j = 0;
+		while (j < game->length)
+		{
+			if (game->map[i][j] == 'P')
+			{
+				game->player_x = j;
+				game->player_y = i;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+// void	get_number_of_collectibles(t_array *map_array, t_array dimensions)
+// {
+// 	size_t	i;
+// 	size_t	j;
+// 	size_t	collectible;
+
+// 	collectible = 0;
+// 	j = 0;
+// 	i = 0;
+// 	while (i < dimensions.breadth)
+// 	{
+// 		j = 0;
+// 		while (j < dimensions.length)
+// 		{
+// 			if (map_array->map[i][j] == 'C')
+// 				collectible++;
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	map_array->num_of_collectibles = collectible;
+// }

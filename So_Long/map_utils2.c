@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:49:59 by adshafee          #+#    #+#             */
-/*   Updated: 2024/03/03 18:24:44 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/03/16 02:13:12 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,34 +106,17 @@ char	**ft_split(const char *s)
 	return (spl_str);
 }
 
-t_array	dimention_check(char *str)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	t_array		area;
-	char				*line;
-	int					fd;
-	size_t				expected_length;
+	char	*ptr_str;
+	size_t	i;
 
-	area.length = 0;
-	area.breadth = 0;
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
-		perror("(ERROR) Unable to open the file...!");
-	while ((line = get_next_line(fd)))
+	ptr_str = (char *)b;
+	i = 0;
+	while (len > i)
 	{
-		area.length = ft_strlen(line);
-		if (area.breadth == 0)
-			expected_length = area.length;
-		else if (expected_length != area.length)
-		{
-			ft_printf("(ERROR) Map not valid");
-			free(line);
-			close(fd);
-			exit(1);
-		}
-		area.breadth++;
-		free(line);
+		ptr_str[i] = (unsigned char)c;
+		i++;
 	}
-	ft_printf("Length = %d\nBreadth = %d\n", area.length, area.breadth);
-	close(fd);
-	return (area);
+	return (b);
 }

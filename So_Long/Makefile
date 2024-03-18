@@ -5,39 +5,108 @@
 #                                                     +:+ +:+         +:+      #
 #    By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/06 17:18:44 by adshafee          #+#    #+#              #
-#    Updated: 2024/03/11 22:57:09 by adshafee         ###   ########.fr        #
+#    Created: 2024/03/16 02:42:50 by adshafee          #+#    #+#              #
+#    Updated: 2024/03/18 23:37:33 by adshafee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-NAME = so_long
-FT_PRINTF = ./libftprintf/libftprintf
-GNL = ./get_next_line/get_next_line
-RM = rm -rf
-SRC = so_long.c map_utils.c map_utils2.c map_utils3.c dfs.c
+################################################################################
+#                                     CONFIG                                   #
+################################################################################
 
-OBJ = $(SRC:.c=.o)
+NAME        := so_long
+CC        := gcc
+FLAGS    := -Wall -Wextra -Werror 
+################################################################################
+#                                 PROGRAM'S SRCS                               #
+################################################################################
 
-all: $(NAME)
+SRCS        :=      get_next_line/get_next_line.c \
+                          get_next_line/get_next_line_utils.c \
+                          libftprintf/ft_functions.c \
+                          libftprintf/ft_hexa_pointers.c \
+                          libftprintf/ft_printf.c \
+                          map_utils.c \
+                          map_utils2.c \
+                          map_utils3.c \
+                          so_long.c \
+						  display_contents.c \
+						  controls.c \
+						#   exit_free.c \
+						#   images_add.c \
+                          
+OBJS        := $(SRCS:.c=.o)
 
-$(NAME): $(OBJ)
-	@make -C ./libftprintf/
-	@make -C ./get_next_line/
-	$(CC) $(CFLAGS) $(OBJ) $(FT_PRINTF) $(GNL) -o $(NAME)
+.c.o:
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+################################################################################
+#                                  Makefile  objs                              #
+################################################################################
 
+
+CLR_RMV		:= \033[0m
+RED		    := \033[1;31m
+GREEN		:= \033[1;32m
+YELLOW		:= \033[1;33m
+BLUE		:= \033[1;34m
+CYAN 		:= \033[1;36m
+RM		    := rm -f
+
+UNAME		:=	$(shell uname)
+
+ifeq ($(UNAME), Darwin)
+$(NAME): ${OBJS}
+
+			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
+			@ $(MAKE) -C mlx all >/dev/null 2>&1
+			@ cp ./mlx/libmlx.a .
+			$(CC) $(CFLAGS) -g3 -Ofast -o $(NAME) -Imlx $(OBJS) -Lmlx -lmlx -lm -framework OpenGL -framework AppKit
+			@echo "$(GREEN)$(NAME) created[0m ✔️"
+endif
+
+ifeq ($(UNAME), Linux)
+$(NAME): ${OBJS}
+			@echo "$(GREEN)Linux compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
+			@chmod 777 mlx_linux/configure
+			@ $(MAKE) -C mlx_linux all
+			$(CC) $(CFLAGS) -g3 -o $(NAME) $(OBJS) -Imlx_linux -Lmlx_linux -lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm
+			@echo "$(GREEN)$(NAME) created[0m ✔️"
+endif
+
+all:		${NAME}
+
+ifeq ($(UNAME), Darwin)
 clean:
-	@make clean -C ./libftprintf/
-	@make clean -C ./get_next_line/
-	$(RM) $(OBJ)
+			@ ${RM} *.o */*.o */*/*.o
+			@ rm -rf $(NAME).dSYM >/dev/null 2>&1
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
+endif
 
-fclean: clean
-	@make fclean -C ./libftprintf/
-	@make fclean -C ./get_next_line/
-	$(RM) $(NAME)
+ifeq ($(UNAME), Linux)
+clean:
+			@ ${RM} *.o */*.o */*/*.o
+			@ rm -rf $(NAME).dSYM >/dev/null 2>&1
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
+endif
 
-re: fclean all
+
+ifeq ($(UNAME), Linux)
+fclean:		clean
+			@ ${RM} ${NAME}
+			@ $(MAKE) -C mlx_linux clean 
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
+endif
+
+ifeq ($(UNAME), Darwin)
+fclean:		clean
+			@ ${RM} ${NAME}
+			@ rm libmlx.a
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
+endif
+
+re:			fclean all
+
+.PHONY:		all clean fclean re
+
+
