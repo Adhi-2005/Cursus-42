@@ -6,11 +6,11 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:29:53 by adshafee          #+#    #+#             */
-/*   Updated: 2024/03/19 00:22:28 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/01 03:33:07 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./so_long.h"
+#include "so_long.h"
 #include "mlx/mlx.h"
 
 void	images_init2(t_array **map)
@@ -45,40 +45,55 @@ void	images_init(t_array **map)
 	images_init2(map);
 }
 
-int	main(int ac, char **av)
+void	setup_game_objects(t_array *game_map, t_array *area)
 {
-	t_array	*game_map = NULL;
-	int	hey;
-
-	if (ac == 2)
+	if (check_map_wall(game_map, *area) == 0)
 	{
-		if (check_file_extention(av[1]))
-		{
-			t_array area = dimention_check(av[1]);
-			game_map = create_array_for_map(av[1], area);
-			hey = check_for_game_objects(game_map, area);
-			if (check_map_wall(game_map, area) == 0)
-			{
-				ft_printf("%s\n", "Border of the map is not valid.. please check and correct it..");
-				return (0);
-			}
-			hey = check_other_object_conditions(game_map, area);
-			get_number_of_collectibles(game_map, area);
-			// is_valid_path(map);
-			// char	**tmp = game_map->map;
-			// while(*tmp)
-			// {
-			// 	 printf("%s\n", *tmp);
-			// 	 tmp++;
-			// }
-			game_map->breadth = area.breadth;
-			game_map->length = area.length;
-			main_window(game_map);
-		}
+		ft_printf("%s\n", "Border of the map is not valid.. ");
+		return ;
 	}
-	else
+	if (!is_valid_path(game_map))
+	{
+		ft_printf("(ERROR) No valid Path....!!!");
+		return ;
+	}
+	if (!check_other_object_conditions(game_map, *area))
+		return ;
+	get_number_of_collectibles(game_map, *area);
+	game_map->breadth = area->breadth;
+	game_map->length = area->length;
+	main_window(game_map);
+}
+
+void	parse_input_and_setup_game(int ac, char **av)
+{
+	t_array	*game_map;
+	t_array	*area;
+	int		i;
+
+	i = 0;
+	game_map = NULL;
+	if (ac != 2)
 	{
 		ft_printf("Input 2 arguments\n");
-		return (0);
+		return ;
 	}
+	if (!check_file_extension(av[1]))
+		return ;
+	area = dimention_check(av[1]);
+	game_map = create_array_for_map(av[1], area);
+	setup_game_objects(game_map, area);
+	while (game_map->map[i])
+	{
+		free (game_map->map[i]);
+		i++;
+	}
+	free(game_map);
+	free(area);
+}
+
+int	main(int ac, char **av)
+{
+	parse_input_and_setup_game(ac, av);
+	return (0);
 }

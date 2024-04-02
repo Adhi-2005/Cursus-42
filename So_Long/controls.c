@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 23:32:13 by adshafee          #+#    #+#             */
-/*   Updated: 2024/03/19 00:20:45 by adshafee         ###   ########.fr       */
+/*   Created: 2024/03/24 02:14:58 by adshafee          #+#    #+#             */
+/*   Updated: 2024/04/02 17:12:45 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,13 @@ void	ft_move_player(t_array *game, size_t a, size_t b)
 
 int	game_hook(int keycode, t_array *game)
 {
+	get_player_position(game);
 	if (keycode == 13 || keycode == 126)
 	{
 		ft_move_player(game, -1, 0);
 	}
 	else if (keycode == 1 || keycode == 125)
-	{
 		ft_move_player(game, 1, 0);
-	}
 	else if (keycode == 0 || keycode == 123)
 	{
 		game->player_position = 1;
@@ -63,7 +62,7 @@ int	game_hook(int keycode, t_array *game)
 	}
 	if (keycode == 53)
 	{
-		printf("Bye\n");
+		ft_printf("Bye\n");
 		finish(game);
 	}
 	img_put(game);
