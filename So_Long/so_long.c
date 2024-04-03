@@ -6,94 +6,98 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:29:53 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/01 03:33:07 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/04 03:31:27 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "mlx/mlx.h"
 
-void	images_init2(t_array **map)
+void	images_init2(t_array *area)
 {
-	(*map)->move_count = 0;
-	(*map)->player_position = 0;
-	(*map)->end_game = 0;
-	(*map)->img_width = 0;
-	(*map)->collect_n = 0;
-	(*map)->img_height = 0;
-	(*map)->pac_man_right = 0;
+	area->move_count = 0;
+	area->player_position = 0;
+	area->end_game = 0;
+	area->img_width = 0;
+	area->collect_n = 0;
+	area->img_height = 0;
+	area->pac_man_right = 0;
 }
 
-void	images_init(t_array **map)
+void	images_init(t_array *area)
 {
-	(*map)->map = NULL;
-	(*map)->length = 0;
-	(*map)->breadth = 0;
-	(*map)->collectibles_found = 0;
-	(*map)->num_of_collectibles = 0;
-	(*map)->exit_found = 0;
-	(*map)->player_x = 0;
-	(*map)->player_y = 0;
-	(*map)->count = 0;
-	(*map)->mlx = NULL;
-	(*map)->win = NULL;
-	(*map)->img_background = NULL;
-	(*map)->img_wall = NULL;
-	(*map)->img_exit = NULL;
-	(*map)->img_collectible = NULL;
-	(*map)->img_player = NULL;
-	images_init2(map);
+	area->map = NULL;
+	area->map_cpy = NULL;
+	area->length = 0;
+	area->breadth = 0;
+	area->collectibles_found = 0;
+	area->num_of_collectibles = 0;
+	area->exit_found = 0;
+	area->player_x = 0;
+	area->player_y = 0;
+	area->count = 0;
+	area->is_valid_map = 0;
+	area->mlx = NULL;
+	area->win = NULL;
+	area->img_background = NULL;
+	area->img_wall = NULL;
+	area->img_exit = NULL;
+	area->img_collectible = NULL;
+	area->img_player = NULL;
+	images_init2(area);
 }
 
-void	setup_game_objects(t_array *game_map, t_array *area)
+static void	setup_game_objects(t_array *area)
 {
-	if (check_map_wall(game_map, *area) == 0)
+	if (check_map_wall(area) == 0)
 	{
 		ft_printf("%s\n", "Border of the map is not valid.. ");
 		return ;
 	}
-	if (!is_valid_path(game_map))
+	if (!is_valid_path(area))
 	{
 		ft_printf("(ERROR) No valid Path....!!!");
+		free(area->map);
 		return ;
 	}
-	if (!check_other_object_conditions(game_map, *area))
+	if (!check_other_object_conditions(area))
 		return ;
-	get_number_of_collectibles(game_map, *area);
-	game_map->breadth = area->breadth;
-	game_map->length = area->length;
-	main_window(game_map);
+	get_number_of_collectibles(area);
+	area->breadth = area->breadth;
+	area->length = area->length;
+	main_window(area);
 }
 
-void	parse_input_and_setup_game(int ac, char **av)
+static void	parse_input_and_setup_game(char **av, t_array *area)
 {
-	t_array	*game_map;
-	t_array	*area;
-	int		i;
+	// int	i;
 
-	i = 0;
-	game_map = NULL;
-	if (ac != 2)
-	{
-		ft_printf("Input 2 arguments\n");
-		return ;
-	}
+	// i = 0;
 	if (!check_file_extension(av[1]))
 		return ;
-	area = dimention_check(av[1]);
-	game_map = create_array_for_map(av[1], area);
-	setup_game_objects(game_map, area);
-	while (game_map->map[i])
-	{
-		free (game_map->map[i]);
-		i++;
-	}
-	free(game_map);
-	free(area);
+	images_init(area);
+	dimention_check(av[1], area);
+	printf("area->length = %zu\n", area->length);
+	printf("area->breadth = %zu\n", area->breadth);
+	create_array_for_map(av[1], area);
+	setup_game_objects(area);
+	// while (area->map[i])
+	// {
+	// 	free (area->map[i]);
+	// 	free (area->map_cpy);
+	// 	i++;
+	// }
+	// free(area->map);
+	// free(area->map_cpy);
+	// free(area);
 }
 
 int	main(int ac, char **av)
 {
-	parse_input_and_setup_game(ac, av);
+	t_array	area;
+	
+	if (ac != 2)
+		return ((void)ft_printf("Input 2 arguments\n"), 0);
+	parse_input_and_setup_game(av, &area);
 	return (0);
 }

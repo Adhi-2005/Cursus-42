@@ -6,27 +6,27 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 01:52:26 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/02 17:16:41 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/04 02:00:27 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_map_wall(t_array *map, t_array size)
+int	check_map_wall(t_array *area)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < size.length)
+	while (i < area->length)
 	{
-		if (map->map[0][i] != '1' || map->map[size.breadth - 1][i] != '1')
+		if (area->map[0][i] != '1' || area->map[area->breadth - 1][i] != '1')
 			return (0);
 		i++;
 	}
 	i = 0;
-	while (i < size.breadth)
+	while (i < area->breadth)
 	{
-		if (map->map[i][0] != '1' || map->map[i][size.length - 1] != '1')
+		if (area->map[i][0] != '1' || area->map[i][area->length - 1] != '1')
 			return (0);
 		i++;
 	}
@@ -43,7 +43,7 @@ int	objects_check_with_numbers(int player, int collectibles, int exit)
 	return (1);
 }
 
-int	check_other_object_conditions(t_array *map_array, t_array size)
+int	check_other_object_conditions(t_array *area)
 {
 	static int	player;
 	static int	collectibles;
@@ -52,16 +52,16 @@ int	check_other_object_conditions(t_array *map_array, t_array size)
 	size_t		j;
 
 	i = 0;
-	while (i < size.breadth)
+	while (i < area->breadth)
 	{
 		j = 0;
-		while (j < size.length)
+		while (j < area->length)
 		{
-			if (map_array->map[i][j] == 'P')
+			if (area->map[i][j] == 'P')
 				player++;
-			else if (map_array->map[i][j] == 'C')
+			else if (area->map[i][j] == 'C')
 				collectibles++;
-			else if (map_array->map[i][j] == 'E')
+			else if (area->map[i][j] == 'E')
 				exit++;
 			j++;
 		}
@@ -72,26 +72,25 @@ int	check_other_object_conditions(t_array *map_array, t_array size)
 	return (1);
 }
 
-void	get_player_position(t_array *game)
+void	get_player_position(t_array *area)
 {
-	size_t	i;
-	size_t	j;
+	size_t	x;
+	size_t	y;
 
-	j = 0;
-	i = 0;
-	while (i < game->breadth)
+	y = 1;
+	while (y < area->breadth - 1)
 	{
-		j = 0;
-		while (j < game->length)
+		x = 1;
+		while (x < area->length - 1)
 		{
-			if (game->map[i][j] == 'P')
+			if (area->map[y][x] == 'P')
 			{
-				game->player_x = j;
-				game->player_y = i;
+				area->player_x = x;
+				area->player_y = y;
 				return ;
 			}
-			j++;
+			x++;
 		}
-		i++;
+		y++;
 	}
 }

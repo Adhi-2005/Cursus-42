@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 02:14:58 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/02 17:12:45 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/04 03:31:01 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	game_hook(int keycode, t_array *game)
 	return (0);
 }
 
-void	get_number_of_collectibles(t_array *map_array, t_array dimensions)
+void	get_number_of_collectibles(t_array *area)
 {
 	size_t	i;
 	size_t	j;
@@ -78,18 +78,18 @@ void	get_number_of_collectibles(t_array *map_array, t_array dimensions)
 	collectible = 0;
 	j = 0;
 	i = 0;
-	while (i < dimensions.breadth)
+	while (i < area->breadth)
 	{
 		j = 0;
-		while (j < dimensions.length)
+		while (j < area->length)
 		{
-			if (map_array->map[i][j] == 'C')
+			if (area->map[i][j] == 'C')
 				collectible++;
 			j++;
 		}
 		i++;
 	}
-	map_array->num_of_collectibles = collectible;
+	area->num_of_collectibles = collectible;
 }
 
 int	finish(t_array *game)
