@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:43:04 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/04 03:32:20 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/04 03:40:25 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct b_list
 	size_t	player_y;
 	size_t	player_x;
 	bool	exit_found;
-	int 	collectibles_found;
+	int		collectibles_got;
 	int		num_of_collectibles;
 	int		count;
 	int		collect_n;

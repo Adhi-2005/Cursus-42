@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:29:53 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/04 03:31:27 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/04 03:39:54 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	images_init(t_array *area)
 	area->map_cpy = NULL;
 	area->length = 0;
 	area->breadth = 0;
-	area->collectibles_found = 0;
+	area->collectibles_got = 0;
 	area->num_of_collectibles = 0;
 	area->exit_found = 0;
 	area->player_x = 0;
@@ -71,7 +71,6 @@ static void	setup_game_objects(t_array *area)
 static void	parse_input_and_setup_game(char **av, t_array *area)
 {
 	// int	i;
-
 	// i = 0;
 	if (!check_file_extension(av[1]))
 		return ;
@@ -95,7 +94,7 @@ static void	parse_input_and_setup_game(char **av, t_array *area)
 int	main(int ac, char **av)
 {
 	t_array	area;
-	
+
 	if (ac != 2)
 		return ((void)ft_printf("Input 2 arguments\n"), 0);
 	parse_input_and_setup_game(av, &area);
