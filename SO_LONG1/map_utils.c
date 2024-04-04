@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:11:35 by adshafee          #+#    #+#             */
-/*   Updated: 2024/03/27 17:45:10 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/04 03:39:07 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int	is_valid_character(char c)
 {
 	if (c != '1' && c != '0' && c != 'P' && c != 'E' && c != 'C')
-		perror("(ERROR) Invalid characters in Map....!");
+	{
+		ft_printf("(ERROR) Invalid characters in Map....!");
+		return (0);
+	}
 	return (1);
 }
 
@@ -40,21 +43,29 @@ int	check_for_game_objects(t_array *map_array, t_array size)
 	return (1);
 }
 
-t_array	*create_array_for_map(char *str, t_array *area)
+void	create_array_for_map(char *str, t_array *area)
 {
-	char	*buffer;
+	char	*line;
 	int		fd;
-	size_t	read_bytes;
-	t_array	*map_array;
+	size_t	index;
 
-	map_array = malloc(sizeof(t_array) * 1024);
-	images_init(&map_array);
-	buffer = malloc(sizeof(char) * (area->length * area->breadth) + area->breadth);
 	fd = open(str, O_RDONLY);
-	read_bytes = read(fd, buffer, (area->length * area->breadth) + area->breadth);
-	buffer[read_bytes] = '\0';
-	map_array->map = ft_split(buffer);
-	return (map_array);
+	if (fd == -1)
+		perror("(ERROR) Unable to open the file...!");
+	index = 0;
+	area->map = malloc(sizeof(char *) * (area->breadth + 1));
+	area->map_cpy = malloc(sizeof(char *) * (area->breadth + 1));
+	line = get_next_line(fd);
+	while (line)
+	{
+		area->map[index] = line;
+		area->map_cpy[index] = ft_strdup(area->map[index]);
+		line = get_next_line(fd);
+		index++;
+	}
+	area->map[index] = NULL;
+	area->map_cpy[index] = NULL;
+	close(fd);
 }
 
 void	display_error(char *line, int fd)
@@ -65,16 +76,12 @@ void	display_error(char *line, int fd)
 	exit(1);
 }
 
-t_array	*dimention_check(char *str)
+void	dimention_check(char *str, t_array *area)
 {
-	t_array				*area;
-	char				*line;
-	int					fd;
-	size_t				expected_length;
+	char	*line;
+	int		fd;
+	size_t	expected_length;
 
-	area = malloc(sizeof(t_array));
-	area->length = 0;
-	area->breadth = 0;
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 		perror("(ERROR) Unable to open the file...!");
@@ -91,5 +98,4 @@ t_array	*dimention_check(char *str)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return (area);
 }

@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:43:04 by adshafee          #+#    #+#             */
-/*   Updated: 2024/03/27 17:33:57 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/04 03:40:25 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ typedef struct b_list
 	size_t	length;
 	size_t	breadth;
 	char	**map;
-	int		player_y;
-	int		player_x;
+	char	**map_cpy;
+	size_t	player_y;
+	size_t	player_x;
 	bool	exit_found;
-	bool	collectibles_found;
+	int		collectibles_got;
 	int		num_of_collectibles;
 	int		count;
 	int		collect_n;
@@ -54,35 +55,34 @@ typedef struct b_list
 	char	*pac_man_up;
 	char	*collectibles;
 	char	*wall;
+	int		is_valid_map;
 }	t_array;
 
-void	images_init(t_array **map);
-void	parse_input_and_setup_game(int ac, char **av);
+void	images_init(t_array *area);
 
 // map_utils.c
 
-t_array	*dimention_check(char *str);
-t_array	*create_array_for_map(char *str, t_array *area);
+void	dimention_check(char *str, t_array	*area);
+void	create_array_for_map(char *str, t_array *area);
 int		check_for_game_objects(t_array *map_array, t_array size);
 
 // map_utils2.c
 
 size_t	word_count(const char *s, char c);
-char	**ft_split(const char *s);
+char	**ft_split(char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 void	*ft_memset(void *b, int c, size_t len);
 
 // map_utils3.c
 
-int		check_map_wall(t_array *map, t_array size);
-int		check_other_object_conditions(t_array *map_array, t_array size);
-int		check_other_object_conditions(t_array *map_array, t_array size);
-// void	get_player_position(t_array *game, char character);
+int		check_map_wall(t_array *area);
+int		check_other_object_conditions(t_array *area);
+void	get_player_position(t_array *area);
 
 // dfs.c
 
-bool	dfs(t_array *game, size_t x, size_t y, bool visited[][game->length]);
+bool	is_valid_path(t_array *area);
 
 // display_contents.c
 
@@ -90,20 +90,19 @@ void	main_window(t_array *game);
 int		img_put(t_array *game);
 void	load_images(t_array *game_map);
 
-// display_contents.c
-
-void	load_pac_man_images(t_array *game_map);
-void	load_other_images(t_array *game_map);
-
 // controls.c
 
 int		game_hook(int keycode, t_array *game);
 void	ft_move_player(t_array *game, size_t a, size_t b);
-void	get_number_of_collectibles(t_array *map_array, t_array dimensions);
+void	get_number_of_collectibles(t_array *area);
 int		finish(t_array *game);
 
 // external_utils.c
 
 int		check_file_extension(char *str);
+char	*ft_strdup(const char *s);
+
+// DELETE LATER 
+void	print_map(char **map);
 
 #endif
