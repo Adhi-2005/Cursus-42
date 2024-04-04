@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:43:04 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/04 03:40:25 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/04 20:42:48 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <stdio.h>
 # include <stdbool.h>
 
 typedef struct b_list
@@ -101,8 +100,5 @@ int		finish(t_array *game);
 
 int		check_file_extension(char *str);
 char	*ft_strdup(const char *s);
-
-// DELETE LATER 
-void	print_map(char **map);
 
 #endif

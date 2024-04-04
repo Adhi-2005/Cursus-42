@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:29:53 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/04 03:39:54 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/04 20:41:16 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,25 +70,23 @@ static void	setup_game_objects(t_array *area)
 
 static void	parse_input_and_setup_game(char **av, t_array *area)
 {
-	// int	i;
-	// i = 0;
+	int	i;
+
+	i = 0;
 	if (!check_file_extension(av[1]))
 		return ;
 	images_init(area);
 	dimention_check(av[1], area);
-	printf("area->length = %zu\n", area->length);
-	printf("area->breadth = %zu\n", area->breadth);
 	create_array_for_map(av[1], area);
 	setup_game_objects(area);
-	// while (area->map[i])
-	// {
-	// 	free (area->map[i]);
-	// 	free (area->map_cpy);
-	// 	i++;
-	// }
-	// free(area->map);
-	// free(area->map_cpy);
-	// free(area);
+	while (area->map[i])
+	{
+		free (area->map[i]);
+		free (area->map_cpy);
+		i++;
+	}
+	free(area->map);
+	free(area->map_cpy);
 }
 
 int	main(int ac, char **av)

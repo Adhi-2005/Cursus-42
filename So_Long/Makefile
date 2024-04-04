@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/16 02:42:50 by adshafee          #+#    #+#              #
-#    Updated: 2024/04/04 03:21:57 by adshafee         ###   ########.fr        #
+#    Created: 2024/04/04 20:35:22 by adshafee          #+#    #+#              #
+#    Updated: 2024/04/04 20:35:26 by adshafee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,5 +96,3 @@ endif
 re:			fclean all
 
 .PHONY:		all clean fclean re
-
-
