@@ -6,39 +6,67 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 02:14:58 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/04 20:23:11 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/06 04:01:43 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_move_player(t_array *game, size_t a, size_t b)
+static t_pos	set_pos(char prev_pos, char next_pos)
 {
-	if (game->map[game->player_y + a][game->player_x + b] == 'E'
-		&& game->num_of_collectibles == 0)
+	t_pos	pos;
+
+	pos.prev = prev_pos;
+	pos.next = next_pos;
+	return (pos);
+}
+
+static void	update_pos(t_array *game, size_t next_y, size_t next_x)
+{
+	t_pos	pos;
+
+	pos.prev = '\0';
+	pos.next = '\0';
+	if (game->map[next_y][next_x] == 'C' && game->num_of_collectibles--)
+		pos = set_pos('0', 'P');
+	if (game->map[next_y][next_x] == 'E' && game->num_of_collectibles)
+		pos = set_pos('0', '.');
+	if (game->map[next_y][next_x] == 'E' && !game->num_of_collectibles)
 	{
-		game->map[game->player_y][game->player_x] = '0';
-		game->move_count++;
-		ft_printf("YOU WON !!!\n");
-		finish(game);
-	}
-	else if (game->map[game->player_y + a][game->player_x + b] == 'E'
-		&& game->num_of_collectibles != 0)
-		ft_printf("You need to collect all the collectibles before you exit\n");
-	else if (game->map[game->player_y + a][game->player_x + b] == '1')
-		ft_printf("You can't move into a wall\n");
-	else if (game->map[game->player_y + a][game->player_x + b] == '0'
-		|| game->map[game->player_y + a][game->player_x + b] == 'C')
-	{
-		if (game->map[game->player_y + a][game->player_x + b] == 'C')
-			game->num_of_collectibles--;
-		game->map[game->player_y + a][game->player_x + b] = 'P';
 		game->map[game->player_y][game->player_x] = '0';
 		game->move_count++;
 		ft_printf("Move count: %d\n", game->move_count);
-		game->player_y += a;
-		game->player_x += b;
+		ft_printf("YOU WON !!!\n");
+		finish(game);
 	}
+	if (game->map[game->player_y][game->player_x] == '.')
+		pos = set_pos('E', 'P');
+	game->map[game->player_y][game->player_x] = pos.prev;
+	game->map[next_y][next_x] = pos.next;
+	game->player_y += next_y;
+	game->player_x += next_x;
+}
+
+static void	ft_move_player(t_array *game, size_t y, size_t x)
+{
+	char	crnt_pos;
+	char	next_pos;
+
+	crnt_pos = game->map[game->player_y][game->player_x];
+	next_pos = game->map[game->player_y + y][game->player_x + x];
+	if (next_pos == '1')
+		return ((void)ft_printf("You can't move into a wall\n"));
+	else if (crnt_pos == '.' || next_pos == 'E' || next_pos == 'C')
+		update_pos(game, game->player_y + y, game->player_x + x);
+	else if (next_pos == '0')
+	{
+		game->map[game->player_y + y][game->player_x + x] = 'P';
+		game->map[game->player_y][game->player_x] = '0';
+		game->move_count++;
+		game->player_y += y;
+		game->player_x += x;
+	}
+	ft_printf("Move count: %d\n", game->move_count);
 }
 
 int	game_hook(int keycode, t_array *game)
@@ -67,29 +95,6 @@ int	game_hook(int keycode, t_array *game)
 	}
 	img_put(game);
 	return (0);
-}
-
-void	get_number_of_collectibles(t_array *area)
-{
-	size_t	i;
-	size_t	j;
-	size_t	collectible;
-
-	collectible = 0;
-	j = 0;
-	i = 0;
-	while (i < area->breadth)
-	{
-		j = 0;
-		while (j < area->length)
-		{
-			if (area->map[i][j] == 'C')
-				collectible++;
-			j++;
-		}
-		i++;
-	}
-	area->num_of_collectibles = collectible;
 }
 
 int	finish(t_array *game)

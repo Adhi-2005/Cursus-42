@@ -6,13 +6,13 @@
 #    By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/04 20:35:22 by adshafee          #+#    #+#              #
-#    Updated: 2024/04/04 20:35:26 by adshafee         ###   ########.fr        #
+#    Updated: 2024/04/06 03:13:28 by adshafee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        := so_long
-CC        := gcc
-FLAGS    := -Wall -Wextra -Werror 
+CC        := cc
+CFLAGS    := -Wall -Wextra -Werror 
 
 SRCS        :=      get_next_line/get_next_line.c \
                           get_next_line/get_next_line_utils.c \
@@ -31,7 +31,7 @@ SRCS        :=      get_next_line/get_next_line.c \
 OBJS        := $(SRCS:.c=.o)
 
 .c.o:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 CLR_RMV		:= \033[0m
 RED		    := \033[1;31m
@@ -92,6 +92,9 @@ fclean:		clean
 			@ rm libmlx.a
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
 endif
+
+sanitize: CFLAGS += -g3 -fsanitize=address
+sanitize: all
 
 re:			fclean all
 

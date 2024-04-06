@@ -6,11 +6,52 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 01:26:11 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/04 02:56:01 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/05 08:15:46 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	is_my_map_is_okay(char *str)
+{
+	int		fd;
+	size_t	read_bytes;
+	char	buf[1];
+
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_printf("(ERROR) File not found....");
+		return (0);
+	}
+	read_bytes = read(fd, buf, 1);
+	if (read_bytes == 0)
+	{
+		ft_printf("(ERROR) No contents in File....!");
+		return (0);
+		close(fd);
+	}
+	close(fd);
+	return (1);
+}
+
+int	extention_check(char *str)
+{
+	if (str[0] == '.' && str[1] == 'b' && str[2] == 'e'
+		&& str[3] == 'r' && str[4] == '\0')
+	{
+		ft_printf("(ERROR) File name is invalid...!");
+		return (0);
+	}
+	if (str[0] == '\0')
+	{
+		ft_printf("(ERROR) File name cannot be empty\n");
+		return (0);
+	}
+	if (!is_my_map_is_okay(str))
+		return (0);
+	return (1);
+}
 
 int	check_file_extension(char *str)
 {
@@ -35,6 +76,8 @@ int	check_file_extension(char *str)
 		i--;
 		j--;
 	}
+	if (!extention_check(str))
+		return (0);
 	return (1);
 }
 
@@ -56,4 +99,27 @@ char	*ft_strdup(const char *s)
 	}
 	str[i] = '\0';
 	return (str);
+}
+
+void	get_number_of_collectibles(t_array *area)
+{
+	size_t	i;
+	size_t	j;
+	size_t	collectible;
+
+	collectible = 0;
+	j = 0;
+	i = 0;
+	while (i < area->breadth)
+	{
+		j = 0;
+		while (j < area->length)
+		{
+			if (area->map[i][j] == 'C')
+				collectible++;
+			j++;
+		}
+		i++;
+	}
+	area->num_of_collectibles = collectible;
 }

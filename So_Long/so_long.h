@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:43:04 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/04 20:42:48 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/06 03:55:58 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdbool.h>
+
+typedef struct s_pos
+{
+	char	prev;
+	char	next;
+}	t_pos;
 
 typedef struct b_list
 {
@@ -82,6 +88,7 @@ void	get_player_position(t_array *area);
 // dfs.c
 
 bool	is_valid_path(t_array *area);
+void	free_map(char **map);
 
 // display_contents.c
 
@@ -92,13 +99,12 @@ void	load_images(t_array *game_map);
 // controls.c
 
 int		game_hook(int keycode, t_array *game);
-void	ft_move_player(t_array *game, size_t a, size_t b);
-void	get_number_of_collectibles(t_array *area);
 int		finish(t_array *game);
 
 // external_utils.c
 
 int		check_file_extension(char *str);
 char	*ft_strdup(const char *s);
+void	get_number_of_collectibles(t_array *area);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 02:49:00 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/04 03:38:12 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/06 03:55:37 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,16 @@ bool	is_valid_path(t_array *area)
 	if (!(area->is_valid_map))
 		return (false);
 	return (true);
+}
+
+void	free_map(char **map)
+{
+	int	i;
+
+	if (!map)
+		return ;
+	i = 0;
+	while (map[i])
+		free(map[i++]);
+	free(map);
 }

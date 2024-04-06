@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:29:53 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/04 20:41:16 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/06 04:05:21 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,12 @@ static void	setup_game_objects(t_array *area)
 {
 	if (check_map_wall(area) == 0)
 	{
-		ft_printf("%s\n", "Border of the map is not valid.. ");
+		ft_printf("(ERROR) Border of the map is not valid..\n");
 		return ;
 	}
 	if (!is_valid_path(area))
 	{
 		ft_printf("(ERROR) No valid Path....!!!");
-		free(area->map);
 		return ;
 	}
 	if (!check_other_object_conditions(area))
@@ -70,23 +69,22 @@ static void	setup_game_objects(t_array *area)
 
 static void	parse_input_and_setup_game(char **av, t_array *area)
 {
-	int	i;
-
-	i = 0;
 	if (!check_file_extension(av[1]))
 		return ;
 	images_init(area);
 	dimention_check(av[1], area);
 	create_array_for_map(av[1], area);
 	setup_game_objects(area);
-	while (area->map[i])
+	if (area->map)
 	{
-		free (area->map[i]);
-		free (area->map_cpy);
-		i++;
+		free_map(area->map);
+		area->map = NULL;
 	}
-	free(area->map);
-	free(area->map_cpy);
+	if (area->map_cpy)
+	{
+		free_map(area->map_cpy);
+		area->map_cpy = NULL;
+	}
 }
 
 int	main(int ac, char **av)
@@ -94,7 +92,7 @@ int	main(int ac, char **av)
 	t_array	area;
 
 	if (ac != 2)
-		return ((void)ft_printf("Input 2 arguments\n"), 0);
+		return ((void)ft_printf("(ERROR) Input 2 arguments\n"), 0);
 	parse_input_and_setup_game(av, &area);
 	return (0);
 }

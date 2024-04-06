@@ -6,33 +6,42 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:50:40 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/04 20:23:30 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/06 04:03:26 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	draw_image(t_array *game, char *img, int i, int j)
+{
+	int	width;
+	int	height;
+
+	width = game->img_width * j;
+	height = game->img_height * i;
+	mlx_put_image_to_window(game->mlx, game->win, img, width, height);
+}
+
 void	put_image_to_window(t_array *game, int i, int j)
 {
 	if (game->map[i][j] == '1')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->wall, game->img_width * j,
-			game->img_height * i);
+		draw_image(game, game->wall, i, j);
 	if (game->map[i][j] == 'E')
-	{
-		mlx_put_image_to_window(game->mlx, game->win, game->img_exit,
-			game->img_width * j, game->img_height * i);
-	}
+		draw_image(game, game->img_exit, i, j);
 	else if (game->map[i][j] == 'C')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->collectibles, game->img_width * j,
-			game->img_height * i);
+		draw_image(game, game->collectibles, i, j);
 	else if (game->map[i][j] == 'P')
 	{
 		game->player_x = j;
 		game->player_y = i;
-		mlx_put_image_to_window(game->mlx, game->win, game->pac_man_left,
-			game->img_width * j, game->img_height * i);
+		draw_image(game, game->pac_man_left, i, j);
+	}
+	else if (game->map[i][j] == '.')
+	{
+		game->player_x = j;
+		game->player_y = i;
+		draw_image(game, game->img_exit, i, j);
+		draw_image(game, game->pac_man_left, i, j);
 	}
 }
 

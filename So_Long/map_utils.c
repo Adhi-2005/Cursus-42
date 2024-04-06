@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:11:35 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/04 03:39:07 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/06 03:15:43 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ void	create_array_for_map(char *str, t_array *area)
 		perror("(ERROR) Unable to open the file...!");
 	index = 0;
 	area->map = malloc(sizeof(char *) * (area->breadth + 1));
+	if (!area->map)
+		perror("(ERROR) Unable to malloc...!");
 	area->map_cpy = malloc(sizeof(char *) * (area->breadth + 1));
+	if (!area->map_cpy)
+		perror("(ERROR) Unable to malloc...!");
 	line = get_next_line(fd);
 	while (line)
 	{
