@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:11:35 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/06 03:15:43 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/06 04:38:13 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ int	is_valid_character(char c)
 	return (1);
 }
 
-int	check_for_game_objects(t_array *map_array, t_array size)
+int	check_for_game_objects(t_array *map_array)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
 	j = 0;
-	while (i < size.breadth)
+	while (i < map_array->breadth)
 	{
 		j = 0;
-		while (j < size.length)
+		while (j < map_array->length)
 		{
 			if (!is_valid_character(map_array->map[i][j]))
 				return (0);

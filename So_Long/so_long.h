@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:43:04 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/06 03:55:58 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/06 04:38:37 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	images_init(t_array *area);
 
 void	dimention_check(char *str, t_array	*area);
 void	create_array_for_map(char *str, t_array *area);
-int		check_for_game_objects(t_array *map_array, t_array size);
+int		check_for_game_objects(t_array *map_array);
 
 // map_utils2.c
 

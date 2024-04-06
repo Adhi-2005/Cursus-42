@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:29:53 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/06 04:05:21 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/06 04:41:38 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	setup_game_objects(t_array *area)
 		ft_printf("(ERROR) Border of the map is not valid..\n");
 		return ;
 	}
+	if (check_for_game_objects(area) == 0)
+		return ;
 	if (!is_valid_path(area))
 	{
 		ft_printf("(ERROR) No valid Path....!!!");
