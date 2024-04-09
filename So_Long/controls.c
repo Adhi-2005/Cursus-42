@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 02:14:58 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/06 04:01:43 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/09 03:56:08 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void	update_pos(t_array *game, size_t next_y, size_t next_x)
 	{
 		game->map[game->player_y][game->player_x] = '0';
 		game->move_count++;
-		ft_printf("Move count: %d\n", game->move_count);
-		ft_printf("YOU WON !!!\n");
+		ft_printf("\033[1;34mMove count: %d\n", game->move_count);
+		ft_printf("\033[1;32mYOU WON !!!\n");
 		finish(game);
 	}
 	if (game->map[game->player_y][game->player_x] == '.')
@@ -55,7 +55,7 @@ static void	ft_move_player(t_array *game, size_t y, size_t x)
 	crnt_pos = game->map[game->player_y][game->player_x];
 	next_pos = game->map[game->player_y + y][game->player_x + x];
 	if (next_pos == '1')
-		return ((void)ft_printf("You can't move into a wall\n"));
+		return ((void)ft_printf("\033[0;35mYou can't move into a wall\n"));
 	else if (crnt_pos == '.' || next_pos == 'E' || next_pos == 'C')
 		update_pos(game, game->player_y + y, game->player_x + x);
 	else if (next_pos == '0')
@@ -66,7 +66,7 @@ static void	ft_move_player(t_array *game, size_t y, size_t x)
 		game->player_y += y;
 		game->player_x += x;
 	}
-	ft_printf("Move count: %d\n", game->move_count);
+	ft_printf("\033[1;34mMove count: %d\n", game->move_count);
 }
 
 int	game_hook(int keycode, t_array *game)
@@ -90,7 +90,7 @@ int	game_hook(int keycode, t_array *game)
 	}
 	if (keycode == 53)
 	{
-		ft_printf("Bye\n");
+		ft_printf("\033[1;32mBye\n");
 		finish(game);
 	}
 	img_put(game);
@@ -108,6 +108,6 @@ int	finish(t_array *game)
 			free(game->map[i++]);
 		free(game->map);
 	}
-	ft_printf("Bye\n");
+	ft_printf("\033[1;32mBye\n");
 	exit(0);
 }

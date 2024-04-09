@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:11:35 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/06 04:38:13 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/09 06:06:10 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	is_valid_character(char c)
 {
 	if (c != '1' && c != '0' && c != 'P' && c != 'E' && c != 'C')
 	{
-		ft_printf("(ERROR) Invalid characters in Map....!");
+		ft_printf("\033[1;31m(ERROR) Invalid characters in Map....!");
 		return (0);
 	}
 	return (1);
@@ -51,14 +51,14 @@ void	create_array_for_map(char *str, t_array *area)
 
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
-		perror("(ERROR) Unable to open the file...!");
+		perror("\033[1;31m(ERROR) Unable to open the file...!");
 	index = 0;
 	area->map = malloc(sizeof(char *) * (area->breadth + 1));
 	if (!area->map)
-		perror("(ERROR) Unable to malloc...!");
+		perror("\033[1;31m(ERROR) Unable to malloc...!");
 	area->map_cpy = malloc(sizeof(char *) * (area->breadth + 1));
 	if (!area->map_cpy)
-		perror("(ERROR) Unable to malloc...!");
+		perror("\033[1;31m(ERROR) Unable to malloc...!");
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -74,7 +74,7 @@ void	create_array_for_map(char *str, t_array *area)
 
 void	display_error(char *line, int fd)
 {
-	ft_printf("(ERROR) Map not valid");
+	ft_printf("\033[1;31m(ERROR) Map not valid");
 	free(line);
 	close(fd);
 	exit(1);
@@ -88,7 +88,10 @@ void	dimention_check(char *str, t_array *area)
 
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
-		perror("(ERROR) Unable to open the file...!");
+	{
+		ft_printf("\033[1;31m(ERROR) Unable to open the file...!");
+		exit(EXIT_FAILURE);
+	}
 	line = get_next_line(fd);
 	while (line)
 	{

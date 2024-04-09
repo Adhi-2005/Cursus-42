@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 01:52:26 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/04 02:00:27 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/09 06:10:53 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	objects_check_with_numbers(int player, int collectibles, int exit)
 {
 	if (player != 1 || collectibles < 1 || exit != 1)
 	{
-		ft_printf("(ERROR) Input the objects correctly....!");
+		ft_printf("\033[1;31m(ERROR) Input the objects correctly....!");
 		return (0);
 	}
 	return (1);

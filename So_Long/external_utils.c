@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 01:26:11 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/05 08:15:46 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/09 03:52:07 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int	is_my_map_is_okay(char *str)
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf("(ERROR) File not found....");
+		ft_printf("\033[1;31m(ERROR) File not found....");
 		return (0);
 	}
 	read_bytes = read(fd, buf, 1);
 	if (read_bytes == 0)
 	{
-		ft_printf("(ERROR) No contents in File....!");
+		ft_printf("\033[1;31m(ERROR) No contents in File....!");
 		return (0);
 		close(fd);
 	}
@@ -40,12 +40,12 @@ int	extention_check(char *str)
 	if (str[0] == '.' && str[1] == 'b' && str[2] == 'e'
 		&& str[3] == 'r' && str[4] == '\0')
 	{
-		ft_printf("(ERROR) File name is invalid...!");
+		ft_printf("\033[1;31m(ERROR) File name is invalid...!");
 		return (0);
 	}
 	if (str[0] == '\0')
 	{
-		ft_printf("(ERROR) File name cannot be empty\n");
+		ft_printf("\033[1;31m(ERROR) File name cannot be empty\n");
 		return (0);
 	}
 	if (!is_my_map_is_okay(str))
@@ -70,7 +70,7 @@ int	check_file_extension(char *str)
 	{
 		if (str[i] != main_extention[j])
 		{
-			ft_printf("(ERROR) Wrong file extention....!");
+			ft_printf("\033[1;31m(ERROR) Wrong file extention....!");
 			return (0);
 		}
 		i--;

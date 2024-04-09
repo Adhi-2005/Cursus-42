@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:50:40 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/06 04:03:26 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/09 03:53:21 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ void	load_images(t_array *game_map)
 	game_map->player_x = 0;
 	if (game_map->wall == NULL)
 	{
-		ft_printf("Error: Could not load wall image\n");
-		exit(0);
+		ft_printf("\033[1;31m(ERROR) Could not load wall image\n");
+		exit(EXIT_FAILURE);
 	}
 }
 
