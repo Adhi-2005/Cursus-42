@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 02:14:58 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/09 03:56:08 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:53:25 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	update_pos(t_array *game, size_t next_y, size_t next_x)
 
 	pos.prev = '\0';
 	pos.next = '\0';
+	game->move_count++;
 	if (game->map[next_y][next_x] == 'C' && game->num_of_collectibles--)
 		pos = set_pos('0', 'P');
 	if (game->map[next_y][next_x] == 'E' && game->num_of_collectibles)
@@ -34,7 +35,6 @@ static void	update_pos(t_array *game, size_t next_y, size_t next_x)
 	if (game->map[next_y][next_x] == 'E' && !game->num_of_collectibles)
 	{
 		game->map[game->player_y][game->player_x] = '0';
-		game->move_count++;
 		ft_printf("\033[1;34mMove count: %d\n", game->move_count);
 		ft_printf("\033[1;32mYOU WON !!!\n");
 		finish(game);
@@ -73,9 +73,7 @@ int	game_hook(int keycode, t_array *game)
 {
 	get_player_position(game);
 	if (keycode == 13 || keycode == 126)
-	{
 		ft_move_player(game, -1, 0);
-	}
 	else if (keycode == 1 || keycode == 125)
 		ft_move_player(game, 1, 0);
 	else if (keycode == 0 || keycode == 123)
@@ -99,15 +97,7 @@ int	game_hook(int keycode, t_array *game)
 
 int	finish(t_array *game)
 {
-	int	i;
-
-	if (game->map)
-	{
-		i = 0;
-		while (game->map[i])
-			free(game->map[i++]);
-		free(game->map);
-	}
 	ft_printf("\033[1;32mBye\n");
-	exit(0);
+	exit_success(game);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: adshafee <adshafee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:43:04 by adshafee          #+#    #+#             */
-/*   Updated: 2024/04/06 04:38:37 by adshafee         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:15:41 by adshafee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	get_player_position(t_array *area);
 // dfs.c
 
 bool	is_valid_path(t_array *area);
-void	free_map(char **map);
 
 // display_contents.c
 
@@ -106,5 +105,10 @@ int		finish(t_array *game);
 int		check_file_extension(char *str);
 char	*ft_strdup(const char *s);
 void	get_number_of_collectibles(t_array *area);
+
+// Utils
+void	free_map(char ***map);
+void	exit_error(t_array *array);
+void	exit_success(t_array *array);
 
 #endif
